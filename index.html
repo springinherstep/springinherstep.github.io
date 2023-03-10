@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Spring In Her Step</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="springinherstep.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300&family=Nanum+Gothic&family=ZCOOL+XiaoWei&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/brands.min.css">
+<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+
+
+
+<style> /* Section that contains the style/formatting attributes used in this website */
+  /* --- Formatting the slider boxes for the image comparisons*/
+  * {box-sizing: border-box;}
+  .img-comp-container {position: relative;height: 400px; /*should be the same height as the images*/}
+  .img-comp-img {position: absolute;width: auto;height: auto;overflow: hidden;}
+  .img-comp-img img {display: block;vertical-align: middle;}
+  .img-comp-slider {position: absolute;z-index: 9;cursor: ew-resize;/*set the appearance of the slider:*/
+    width: 40px;height: 40px;background-color: #5375A1;opacity: 0.7;border-radius: 50%;}
+
+  /* --- Formatting information for the fonts used in the website*/
+  /* --- #5375A1 is Wendy Blue*/
+  /* --- #5A5A5A is grey (more user-friendly than pure black)*/
+  /* --- #FFFFFF is white */
+  h1 {color: #5375A1;font-family: "ZCOOL XiaoWei", Arial}
+  h2 {color: #5A5A5A;font-family: "ZCOOL XiaoWei", Arial}
+  h3 {color: #FFFFFF;font-family: "ZCOOL XiaoWei", Arial}
+  h4 {color: #5375A1;font-family: "Futura", Arial}
+  h5 {color: #5A5A5A;font-family: "Futura", Arial}
+  h6 {color: #FFFFFF;font-family: "Futura", Arial}
+  body {color: #5A5A5A;font-family: "Futura", Arial}
+
+  /* --- Formatting the lines that break up the sections*/
+  hr.wendyblue {border-top: 2px solid #5375A1;}
+  hr.grey {border-top: 2px solid #5A5A5A;}
+  hr.white {border-top: 2px solid #FFFFFF;}
+
+  /* --- Formatting information for the url links displayed in the website*/
+  a:link {text-decoration: none;}
+  a:visited {text-decoration: none;}
+  a:hover {text-decoration: underline;}
+  a:active {text-decoration: underline;}
+  /* --- Formatting information for the button links displayed in the website*/
+  a.button:link {text-decoration: none;}
+  a.button:visited {text-decoration: none;}
+  a.button:hover {text-decoration: none;}
+  a.button:active {text-decoration: none;}
+
+  /* --- Formatting the tooltip that appears when the mouse hovers over an image*/
+  .tooltip .tooltiptext {visibility: hidden;width: 120px;background-color: #5375A1;
+    color: #fff;text-align: center;border-radius: 6px;padding: 5px 0;
+    /* Position the tooltip */ position: absolute;z-index: 1;}
+  .tooltip:hover .tooltiptext {visibility: visible;}
+
+  /* WENDY: This is the large image on the left hand side of the website */
+  /* It will not be shown on smaller screens, like mobile phones */
+  /* To use a new background image, rename it BACKGROUNDIMAGE.PNG in the IMAGES folder */
+  .w3-row-padding img {margin-bottom: 12px}
+  .bgimg {background-position: center;background-repeat: no-repeat;background-size: cover;
+    background-image: url('images/backgroundimage.png');min-height: 100%;}
+
+  /* --- Formatting for the image gallery used for the birth month flowers
+  The gallery will resize itself based on the size of the screen/window */
+  div.gallery {  border: 1px solid #FFFFFF;}
+  div.gallery:hover {  border: 2px solid #FFFFFF;}
+  div.gallery img {  width: 100%;  height: auto;}
+  /* WENDY: if you need more room for the text under the birth month flowers, change the HEIGHT info below
+  and it will add lines to the gallery caption boxes */
+  div.desc {  padding: 15px;  text-align: left; color:#5375A1 ; height: 100px}
+  * {  box-sizing: border-box;}
+  .responsive {  padding: 10px 10px;  float: left;  width: 24.99999%;}
+  @media only screen and (max-width: 700px) {  .responsive {    width: 49.99999%;    margin: 6px 0;  }}
+  @media only screen and (max-width: 500px) {  .responsive {    width: 100%;  }}
+  .clearfix:after {  content: "";  display: table;  clear: both;}
+
+    /* --- Formatting for the buttons that appears throughout the website */
+  .button {background-color: #5375A1;border: 2px solid #5375A1;color: white;padding: 2px;text-align: center;text-decoration: none;
+    display: inline-block;margin: 4px 2px;cursor: pointer;border-radius: 8px;}
+  .button-center {margin: 10px;position: absolute;left: 50%;-ms-transform: translateX(-50%);transform: translateX(-50%);}
+  .button-container {position: relative;}
+
+  /* --- Formatting for the gallery used for the house portraits */
+  .row {display: -ms-flexbox; /* IE10 */display: flex;-ms-flex-wrap: wrap; /* IE10 */flex-wrap: wrap;padding: 0 4px;}
+  /* Create two equal columns that sits next to each other */
+  .column {-ms-flex: 50%; /* IE10 */flex: 50%;max-width: 50%;padding: 0 4px;}
+  .column img {margin-top: 8px;vertical-align: middle;width: 100%;}
+  /* Responsive layout - makes a two column-layout instead of four columns */
+  @media screen and (max-width: 800px) {
+    .column {-ms-flex: 50%;flex: 50%;max-width: 50%;}}
+  /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+  @media screen and (max-width: 600px) {
+    .column {-ms-flex: 100%;flex: 100%;max-width: 100%;}}
+
+</style>
+
+<script> /* Section that contains functions called in this website */
+/* Function for the slider across the images */
+function initComparisons() {
+  var x, i;
+  /* Find all elements with an "overlay" class: */
+  x = document.getElementsByClassName("img-comp-overlay");
+  for (i = 0; i < x.length; i++) {
+    /* Once for each "overlay" element:
+    pass the "overlay" element as a parameter when executing the compareImages function: */
+    compareImages(x[i]);
+  }
+  function compareImages(img) {
+    var slider, img, clicked = 0, w, h;
+    /* Get the width and height of the img element */
+    w = img.offsetWidth;
+    h = img.offsetHeight;
+    /* Set the width of the img element to 50%: */
+    img.style.width = (w / 2) + "px";
+    /* Create slider: */
+    slider = document.createElement("DIV");
+    slider.setAttribute("class", "img-comp-slider");
+    /* Insert slider */
+    img.parentElement.insertBefore(slider, img);
+    /* Position the slider in the middle: */
+    slider.style.top = (h / 2) - (slider.offsetHeight / 2) + "px";
+    slider.style.left = (w / 2) - (slider.offsetWidth / 2) + "px";
+    /* Execute a function when the mouse button is pressed: */
+    slider.addEventListener("mousedown", slideReady);
+    /* And another function when the mouse button is released: */
+    window.addEventListener("mouseup", slideFinish);
+    /* Or touched (for touch screens: */
+    slider.addEventListener("touchstart", slideReady);
+     /* And released (for touch screens: */
+    window.addEventListener("touchend", slideFinish);
+    function slideReady(e) {
+      /* Prevent any other actions that may occur when moving over the image: */
+      e.preventDefault();
+      /* The slider is now clicked and ready to move: */
+      clicked = 1;
+      /* Execute a function when the slider is moved: */
+      window.addEventListener("mousemove", slideMove);
+      window.addEventListener("touchmove", slideMove);
+    }
+    function slideFinish() {
+      /* The slider is no longer clicked: */
+      clicked = 0;
+    }
+    function slideMove(e) {
+      var pos;
+      /* If the slider is no longer clicked, exit this function: */
+      if (clicked == 0) return false;
+      /* Get the cursor's x position: */
+      pos = getCursorPos(e)
+      /* Prevent the slider from being positioned outside the image: */
+      if (pos < 0) pos = 0;
+      if (pos > w) pos = w;
+      /* Execute a function that will resize the overlay image according to the cursor: */
+      slide(pos);
+    }
+    function getCursorPos(e) {
+      var a, x = 0;
+      e = (e.changedTouches) ? e.changedTouches[0] : e;
+      /* Get the x positions of the image: */
+      a = img.getBoundingClientRect();
+      /* Calculate the cursor's x coordinate, relative to the image: */
+      x = e.pageX - a.left;
+      /* Consider any page scrolling: */
+      x = x - window.pageXOffset;
+      return x;
+    }
+    function slide(x) {
+      /* Resize the image: */
+      img.style.width = x + "px";
+      /* Position the slider: */
+      slider.style.left = img.offsetWidth - (slider.offsetWidth / 2) + "px";
+    }
+  }
+}
+</script>
+
+</head>
+
+<body> <!-- Section that contains the actual website -->
+<!-- Sidebar with image -->
+<nav class="w3-sidebar w3-hide-medium w3-hide-small" style="width:40%">
+  <div class="bgimg"></div>
+</nav>
+
+<!-- Hidden Sidebar (reveals when clicked on menu icon)-->
+<nav class="w3-sidebar w3-wendyblue w3-animate-right w3-xxlarge" style="display:none;padding-top:150px;right:0;z-index:2" id="mySidebar">
+  <a href="javascript:void(0)" onclick="closeNav()" class="w3-button w3-xxxlarge w3-display-topright w3-hover-white" style="padding:0 12px;">
+    <i class="fa fa-remove w3-hover-white" style=color:white></i>
+  </a>
+
+  <div class="w3-bar-block w3-center">
+    <a href="#home" class="w3-bar-item w3-button w3-hover-wendyblue" onclick="closeNav()">
+      <h3 class="w3-xxlarge w3-text-white">Home</h3></a>
+    <a href="#birthdaymonthflowers" class="w3-bar-item w3-button w3-hover-wendyblue" onclick="closeNav()">
+      <h3 class="w3-xxlarge w3-text-white">Birthday month flowers</h3></a>
+    <a href="#houseportraits" class="w3-bar-item w3-button w3-hover-wendyblue" onclick="closeNav()">
+        <h3 class="w3-xxlarge w3-text-white">House portraits</h3></a>
+    <a href="#prints" class="w3-bar-item w3-button w3-hover-wendyblue" onclick="closeNav()">
+      <h3 class="w3-xxlarge w3-text-white">Prints for your home</h3></a>
+    <a href="#about" class="w3-bar-item w3-button w3-hover-wendyblue" onclick="closeNav()">
+      <h3 class="w3-xxlarge w3-text-white">About</h3></a>
+    <a href="#findme" class="w3-bar-item w3-button w3-hover-wendyblue" onclick="closeNav()">
+      <h3 class="w3-xxlarge w3-text-white">Find me</h3></a>
+  </div>
+</nav>
+
+<!-- Page Content -->
+<div class="w3-main w3-padding-large" style="margin-left:45%">
+
+  <!-- Menu icon to open sidebar -->
+  <span class="w3-button w3-top w3-white w3-xxlarge w3-text-wendyblue w3-hover-wendyblue w3-hover-text-white" style="width:auto;right:0;" onclick="openNav()">
+    <i class="fa fa-bars"></i></span>
+
+  <!-- Header -->
+  <header class="w3-container w3-center" style="padding:50px 16px" id="home">
+    <img src="images/springinhersteplogo.png" class="w3-image w3-round" style="display:block;width:20%;margin:auto;">
+    <br>
+    <br>
+    <h1 class="w3-jumbo"><b>Spring in her step</b></h1>
+    <h1 class="w3-xlarge"><i>Hampshire-based Artist & Illustrator</i></h1>
+    <h1 class="w3-xlarge"><i>House portraits & Greetings cards</i></h1>
+    <br>
+    <br>
+      <!-- WENDY: THIS IS THE BANNER UNDER THE TITLE
+      To use a new banner image, rename it BANNERIMAGE.PNG in the IMAGES folder
+      To remove the banner image, delete the file called BANNER IMAGE.PNG in the IMAGES folder-->
+    <img src="images/bannerimage.png" class="w3-image w3-round w3-hide-medium w3-hide-small" style="display:block;width:100%;margin:auto;">
+    <br>
+    <br>
+
+    <div class="button-container"> <!-- Section button -->
+      <div class="button-center">
+        <button class="button w3-hover-white w3-hover-text-wendyblue">
+          <h3 class="w3-large w3-hover-text-wendyblue ">
+            <a href="https://www.etsy.com/shop/SpringInHerStep" target="_blank"> Visit my Etsy store </a>
+          </h3>
+        </button>
+      </div>
+      <br>
+      <br>
+    </div>
+  </header>
+
+  <!-- BIRTH MONTH FLOWERS section -->
+  <div class="w3-padding-32 w3-content" id="birthdaymonthflowers">
+    <h1 class="w3-xxlarge w3-text-wendyblue" >Birthday Month Flowers</h1> <!-- section title -->
+    <hr class="w3-opacity wendyblue"> <!-- section separator line -->
+    <div class="w3-row-padding" style="margin:0 -16px"> <!-- section gallery -->
+      <!-- WENDY: BIRTHDAY MONTH FLOWERS gallery intro -->
+      <p> Each month has a flower to represent, each with its own meanings. </p>
+      <p> Take a wander through this little garden and find the card for the loved one in your
+      life to celebrate their birthday. All available in my Etsy shop. </p>
+
+      <!-- WENDY: BIRTHDAY MONTH FLOWERS gallery images and text -->
+      <div class="responsive"> <!-- Image 1 -->
+        <div class="gallery">
+          <!-- WENDY: This is where you change the image for that birth month flower-->
+          <a target="_blank" href="images/birthdaymonthflower01.png">
+            <img src="images/birthdaymonthflower01.png" alt="Snowdrop: birth month flower for January" width="600" height="400">
+          </a>
+          <!-- WENDY: This is where you change the text for that image in the BIRTH MONTH FLOWERS section -->
+          <!-- <div class="desc">December</div> -->
+        </div>
+      </div>
+      <div class="responsive"> <!-- Image 2 -->
+        <div class="gallery">
+          <!-- WENDY: This is where you change the image for that birth month flower-->
+          <a target="_blank" href="images/birthdaymonthflower02.png">
+            <img src="images/birthdaymonthflower02.png" alt="Violet: birth month flower for February" width="600" height="400">
+          </a>
+          <!-- WENDY: This is where you change the text for that image in the BIRTH MONTH FLOWERS section -->
+          <!-- <div class="desc">December</div> -->
+        </div>
+      </div>
+      <div class="responsive"> <!-- Image 3 -->
+        <div class="gallery">
+          <!-- WENDY: This is where you change the image for that birth month flower-->
+          <a target="_blank" href="images/birthdaymonthflower03.png">
+            <img src="images/birthdaymonthflower03.png" alt="Daffodil: birth month flower for March" width="600" height="400">
+          </a>
+          <!-- WENDY: This is where you change the text for that image in the BIRTH MONTH FLOWERS section -->
+          <!-- <div class="desc">December</div> -->
+        </div>
+      </div>
+      <div class="responsive"> <!-- Image 4 -->
+        <div class="gallery">
+          <!-- WENDY: This is where you change the image for that birth month flower-->
+          <a target="_blank" href="images/birthdaymonthflower04.png">
+            <img src="images/birthdaymonthflower04.png" alt="Daisy: birth month flower for April" width="600" height="400">
+          </a>
+          <!-- WENDY: This is where you change the text for that image in the BIRTH MONTH FLOWERS section -->
+          <!-- <div class="desc">December</div> -->
+        </div>
+      </div>
+      <div class="responsive"> <!-- Image 5 -->
+        <div class="gallery">
+          <!-- WENDY: This is where you change the image for that birth month flower-->
+          <a target="_blank" href="images/birthdaymonthflower05.png">
+            <img src="images/birthdaymonthflower05.png" alt="Lily-of-the-valley: birth month flower for May" width="600" height="400">
+          </a>
+          <!-- WENDY: This is where you change the text for that image in the BIRTH MONTH FLOWERS section -->
+          <!-- <div class="desc">December</div> -->
+        </div>
+      </div>
+      <div class="responsive"> <!-- Image 6 -->
+        <div class="gallery">
+          <!-- WENDY: This is where you change the image for that birth month flower-->
+          <a target="_blank" href="images/birthdaymonthflower06.png">
+            <img src="images/birthdaymonthflower06.png" alt="Honeysuckle: birth month flower for June" width="600" height="400">
+          </a>
+          <!-- WENDY: This is where you change the text for that image in the BIRTH MONTH FLOWERS section -->
+          <!-- <div class="desc">December</div> -->
+        </div>
+      </div>
+      <div class="responsive"> <!-- Image 7 -->
+        <div class="gallery">
+          <!-- WENDY: This is where you change the image for that birth month flower-->
+          <a target="_blank" href="images/birthdaymonthflower07.png">
+            <img src="images/birthdaymonthflower07.png" alt="Waterlily: birth month flower for July" width="600" height="400">
+          </a>
+          <!-- WENDY: This is where you change the text for that image in the BIRTH MONTH FLOWERS section -->
+          <!-- <div class="desc">December</div> -->
+        </div>
+      </div>
+      <div class="responsive"> <!-- Image 8 -->
+        <div class="gallery">
+          <!-- WENDY: This is where you change the image for that birth month flower-->
+          <a target="_blank" href="images/birthdaymonthflower08.png">
+            <img src="images/birthdaymonthflower08.png" alt="Poppy: birth month flower for August" width="600" height="400">
+          </a>
+          <!-- WENDY: This is where you change the text for that image in the BIRTH MONTH FLOWERS section -->
+          <!-- <div class="desc">December</div> -->
+        </div>
+      </div>
+      <div class="responsive"> <!-- Image 9 -->
+        <div class="gallery">
+          <!-- WENDY: This is where you change the image for that birth month flower-->
+          <a target="_blank" href="images/birthdaymonthflower09.png">
+            <img src="images/birthdaymonthflower09.png" alt="Aster: birth month flower for September" width="600" height="400">
+          </a>
+          <!-- WENDY: This is where you change the text for that image in the BIRTH MONTH FLOWERS section -->
+          <!-- <div class="desc">December</div> -->
+        </div>
+      </div>
+      <div class="responsive"> <!-- Image 10 -->
+        <div class="gallery">
+          <!-- WENDY: This is where you change the image for that birth month flower-->
+          <a target="_blank" href="images/birthdaymonthflower10.png">
+            <img src="images/birthdaymonthflower10.png" alt="Marigold: birth month flower for October" width="600" height="400">
+          </a>
+          <!-- WENDY: This is where you change the text for that image in the BIRTH MONTH FLOWERS section -->
+          <!-- <div class="desc">December</div> -->
+        </div>
+      </div>
+      <div class="responsive"> <!-- Image 11 -->
+        <div class="gallery">
+          <!-- WENDY: This is where you change the image for that birth month flower-->
+          <a target="_blank" href="images/birthdaymonthflower11.png">
+            <img src="images/birthdaymonthflower11.png" alt="chrysanthemum: birth month flower for November" width="600" height="400">
+          </a>
+          <!-- WENDY: This is where you change the text for that image in the BIRTH MONTH FLOWERS section -->
+          <!-- <div class="desc">December</div> -->
+        </div>
+      </div>
+      <div class="responsive"> <!-- Image 12 -->
+        <div class="gallery">
+          <!-- WENDY: This is where you change the image for that birth month flower-->
+          <a target="_blank" href="images/birthdaymonthflower12.png">
+            <img src="images/birthdaymonthflower12.png" alt="Holly: birth month flower for December" width="600" height="400">
+          </a>
+          <!-- WENDY: This is where you change the text for that image in the BIRTH MONTH FLOWERS section -->
+          <!-- <div class="desc">December</div> -->
+        </div>
+      </div>
+    </div>      <!-- end section gallery -->
+    <div class="button-container"> <!-- section button -->
+      <div class="button-center">
+        <button class="button w3-hover-white w3-hover-text-wendyblue">
+          <h3 class="w3-large w3-hover-text-wendyblue ">
+            <a href="https://www.etsy.com/shop/SpringInHerStep?ref=shop_sugg_market&section_id=39669759" target="_blank"> Buy the cards (Etsy store) </a>
+          </h3>
+        </button>
+      </div>
+    </div> <!-- end section button -->
+  </div> <!-- end of the BIRTHDAY MONTH FLOWERS section -->
+
+  <!-- HOUSE PORTRAITS  section -->
+  <div class="w3-padding-128 w3-content" id="houseportraits">
+    <h1 class="w3-xxlarge w3-text-wendyblue" >House Portraits</h1> <!-- section title -->
+    <hr class="w3-opacity wendyblue"> <!-- section separator line -->
+    <div class="w3-row-padding" style="margin:0 -16px"> <!-- section gallery -->
+      <!-- WENDY: HOUSE PORTRAITS gallery intro -->
+      <p> New home, old home, wedding venue – I create bespoke illustrations of your favourite building. </p>
+      <p> A perfect gift for a celebration to remember that special place in the world.
+        Contact me for commissions available as prints up to A3 or as a set of cards to use as new address notifications,
+        Christmas cards, save the date for a wedding – let me know what you would like. </p>
+      <p> I work from photographs and create a black and white image – with a splash of colour if you like!
+        Contact me for details about how you can have your own bespoke illustration created. </p>
+      <!-- WENDY: HOUSE PORTRAITS  images for the before and after slider sections -->
+      <div class="w3-row-padding w3-hide-medium w3-hide-small" style="margin:0 80px">
+        <div class="img-comp-container row "> <!-- Displays the first set of images to compare -->
+            <div class="img-comp-img ">
+              <img src="images/houseportrait01.png" width="600" height="400" style="border: 2px solid #5375A1;">
+              <figcaption  style=" background-color: #5375A1; color: white; font-style: italic; padding: 2px;  text-align: center;">Move the slider to compare photo and house portrait</figcaption>
+            </div>
+            <div class="img-comp-img img-comp-overlay ">
+              <img src="images/houseportrait02.png" width="600" height="400" style="border: 2px solid #5375A1;">
+            </div>
+        </div>
+        <br>
+        <br>
+        <div class="img-comp-container row "> <!-- Displays the second set of images to compare -->
+            <div class="img-comp-img">
+              <img src="images/houseportrait03.png" width="600" height="400" style="border: 2px solid #5375A1;">
+            </div>
+            <div class="img-comp-img img-comp-overlay">
+              <img src="images/houseportrait04.png" width="600" height="400" style="border: 2px solid #5375A1;">
+            </div>
+        </div>
+        <script>
+        /*Execute a function that will run an image compare function for each element with the img-comp-overlay class:*/
+          initComparisons();
+        </script>
+      </div>
+
+      <!-- WENDY: HOUSE PORTRAITS gallery images for other house portraits-->
+      <div class="row w3-padding-128">
+        <div class="column">
+          <a target="_blank" href="images/houseportrait05.png">
+            <img src="images/houseportrait05.png" style="width:100%" alt="Spanish house">
+            <figcaption  style=" background-color: white; color: black; font-style: italic; padding: 2px;  text-align: center;">Spanish house</figcaption>
+          </a>
+          <a target="_blank" href="images/houseportrait07.png">
+            <img src="images/houseportrait07.png" style="width:100%" alt="Cottage">
+              <figcaption  style=" background-color: white; color: black; font-style: italic; padding: 2px;  text-align: center;">Cottage</figcaption>
+          </a>
+          <a target="_blank" href="images/houseportrait09.png">
+            <img src="images/houseportrait09.png" style="width:100%" alt="Farmhouse">
+              <figcaption  style=" background-color: white; color: black; font-style: italic; padding: 2px;  text-align: center;">Farmhouse</figcaption>
+          </a>
+        </div>
+        <div class="column">
+          <a target="_blank" href="images/houseportrait06.png">
+            <img src="images/houseportrait06.png" style="width:100%" alt="Terraced house">
+              <figcaption  style=" background-color: white; color: black; font-style: italic; padding: 2px;  text-align: center;">Terraced house</figcaption>
+          </a>
+          <a target="_blank" href="images/houseportrait08.png">
+            <img src="images/houseportrait08.png" style="width:100%" alt="House extension project">
+              <figcaption  style=" background-color: white; color: black; font-style: italic; padding: 2px;  text-align: center;">House extension project</figcaption>
+          </a>
+        </div>
+      </div>
+    </div> <!-- end section gallery -->
+    <div class="button-container"> <!-- section button -->
+        <div class="button-center">
+          <button class="button w3-hover-white w3-hover-text-wendyblue">
+            <h3 class="w3-large w3-hover-text-wendyblue ">
+              <a href="mailto:contact@springinherstep.co.uk"> Email me to discuss your house portrait </a>
+            </h3>
+          </button>
+        </div>
+      </div> <!-- end section button -->
+  </div> <!-- end of the HOUSE PORTRAIT section -->
+
+  <!-- PRINTS FOR YOUR HOME section -->
+  <div class="w3-padding-32 w3-content" id="prints">
+    <h1 class="w3-xxlarge w3-text-wendyblue" >Prints For Your Home</h1> <!-- section title -->
+    <hr class="w3-opacity wendyblue"> <!-- section separator line -->
+    <div class="w3-row-padding" style="margin:0 -16px"> <!-- section gallery -->
+      <!-- WENDY: PRINTS FOR YOUR HOME gallery intro -->
+      <p> Inspired by nature and by local architecture <i>Spring In Her Step </i>has a
+      range of elegant prints ready for you to frame and display in your home. </p>
+      <p>An ever-changing and growing selection, find me at an event or online at my Etsy shop. </p>
+      <!-- WENDY: PRINTS FOR YOUR HOME gallery images and text -->
+      <div class="row">
+        <div class="column">
+          <img src="images/print01.png" style="width:100%" alt="Print description">
+          <img src="images/print03.png" style="width:100%" alt="Print description">
+        </div>
+        <div class="column">
+          <img src="images/print02.png" style="width:100%" alt="Print description">
+          <img src="images/print04.png" style="width:100%" alt="Print description">
+        </div>
+      </div>
+    </div>      <!-- end section gallery -->
+    <div class="button-container"> <!-- section button -->
+      <div class="button-center">
+        <button class="button w3-hover-white w3-hover-text-wendyblue">
+          <h3 class="w3-large w3-hover-text-wendyblue ">
+            <a href="https://www.etsy.com/shop/SpringInHerStep?ref=shop_sugg_market&section_id=39737120 "target="_blank"> Buy a print (Etsy store) </a>
+          </h3>
+        </button>
+      </div>
+    </div> <!-- end section button -->
+  </div> <!-- end of the PRINTS FOR YOUR HOME section -->
+
+  <!-- INSTAGRAM FEED section -->
+  <div class="w3-padding-128 w3-content" id="instagramfeed">
+    <h1 class="w3-xxlarge w3-text-wendyblue" >Instagram </h1> <!-- section title -->
+    <hr class="w3-opacity wendyblue"> <!-- section separator line -->
+    <p> Follow the adventures of the <i>Spring In Her Step</i> story over on Instagram.  </p>
+    <!-- Instagram feed using a plugin -->
+    <figure data-behold-id="yeXotniUtccfyPbvyCr1" ></figure>
+    <script src="https://w.behold.so/widget.js" type="module"></script>
+    <div class="button-container"> <!-- section button -->
+      <div class="button-center">
+        <button class="button w3-hover-white w3-hover-text-wendyblue">
+          <h3 class="w3-large w3-hover-text-wendyblue ">
+            <a href="https://www.instagram.com/spring.in.her.step/" target="_blank"> View more instagram posts </a>
+          </h3>
+        </button>
+      </div>
+    </div>
+  </div> <!-- end of the INSTAGRAM FEED section -->
+
+  <!-- ABOUT Section -->
+  <div class="w3-padding-32 w3-content" id="about">
+    <h1 class="w3-xxlarge w3-text-wendyblue" >About</h1> <!-- section title -->
+    <hr class="w3-opacity wendyblue"> <!-- section separator line -->
+    <!-- WENDY: This is where you change your photo in your ABOUT section-->
+    <img src="images/wendy.png" style="width:25%" class="w3-grayscale w3-hide-medium w3-hide-small">
+    <!-- WENDY: This is where you change the text for your ABOUT section -->
+    <p>Behind Spring In Her Step is Wendy. </p>
+    <p>I’m a creative soul finding joy in my artwork and the joy it brings in turn to others. </p>
+    <p> Spring In Her Step is where you can find artwork that will brighten you home,
+    have a bespoke illustration of a special building created and find greetings cards to send
+    to loved ones to brighten their day. We all need a little lift – let Spring In Her Step provide that for you! </p>
+    <div class="button-container"> <!-- section button -->
+      <div class="button-center">
+        <button class="button w3-hover-white w3-hover-text-wendyblue">
+          <h3 class="w3-large w3-hover-text-wendyblue ">
+              <a href="https://www.etsy.com/shop/SpringInHerStep" target="_blank">Visit my Etsy store</a>
+          </h3>
+        </button>
+      </div>
+    </div>
+  </div> <!-- end of the ABOUT section -->
+
+  <!-- FIND ME Section -->
+  <div class="w3-padding-128 w3-content" id="findme">
+    <h1 class="w3-xxlarge w3-text-wendyblue" >Find Me</h1> <!-- section title -->
+    <hr class="w3-opacity wendyblue"> <!-- section separator line -->
+    <!-- WENDY: This is where you change the text in the FIND ME section -->
+    <h1 class="w3-xlarge" >Come and see me at my next in-person event</h1>
+    <p> When I’m at an event I can share what I do in person and have loved engaging with customers –
+      new and regular ones coming back again. Talking with people who enjoy my art and taking
+      commissions for illustrations of buildings, I’m able to share the love of what I do with others. </p>
+    <!-- WENDY: This is where you change the text and link for your next market info -->
+    <h5 class="w3-hover-text-wendyblue">
+      <i class="w3-margin-right w3-wendyblue fa fa-map-marker fa-border" style="font-size:30px"></i>
+      <a href="https://altoncraftmarket.co.uk/upcoming-markets/" target="_blank">Alton Craft Market – next date: Saturday 11th March 10am-3pm </a>
+    </h5>
+    <br>
+    <br>
+    <h1 class="w3-xlarge" >Let's get in touch. Send me a message!</h1>
+    <!-- WENDY: this is where you change your contact email address -->
+    <h5 class="w3-hover-text-wendyblue">
+      <i class="w3-margin-right w3-wendyblue fa fa-envelope-o fa-border" style="font-size:30px"></i>
+      <a href="mailto:contact@springinherstep.co.uk" target="_blank">contact@SpringInHerStep.co.uk</a>
+    </h5>
+    <!-- WENDY: this is where you change the link to your instagram & the name of your instagram account -->
+    <h5 class="w3-hover-text-wendyblue">
+      <i class="w3-margin-right w3-wendyblue fa fa-instagram fa-border" style="font-size:30px"></i>
+      <a href="https://www.instagram.com/spring.in.her.step/" target="_blank">@Spring.In.Her.Step</a>
+    </h5>
+  </div> <!-- end of the FIND ME section-->
+
+  <!-- Footer -->
+  <footer class="w3-container w3-padding-16 w3-wendyblue w3-center w3-small" style="margin:-24px">
+      <h6><i class="fa fa-copyright" style="font-size:20px"></i> Spring In Her Step </h6>
+  </footer>
+
+<!-- END PAGE CONTENT -->
+</div>
+
+<script> // Section that contains more functions for this website
+// Open and close sidebar
+function openNav() {
+  document.getElementById("mySidebar").style.width = "60%";
+  document.getElementById("mySidebar").style.display = "block";
+}
+
+function closeNav() {
+  document.getElementById("mySidebar").style.display = "none";
+}
+</script>
+
+</body>
+</html>
